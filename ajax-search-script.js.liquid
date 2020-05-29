@@ -1,0 +1,26 @@
+$(document).ready(function(){
+ $('.navigation__search__bar .custom_serach_popup input[type="search"]').bind('keyup change', function(){
+var term = '*' + $(this).val() + '*';
+var $form = $(this).closest('form');
+var linkURL = 'https://www.pasocbd.co.uk/search?view=json&q=' + term;
+console.log(linkURL);
+
+ jQuery.ajax({
+        type: "GET",
+        url: linkURL,
+        success(data) {   
+$('.popup_search_box').html(data);    
+$('.popup_search_box').show();   
+        }
+    });
+
+ });
+
+ $('body').bind('click', function(){
+        //Click anywhere on page, hide results
+   setTimeout(function(){
+ $('.navigation__search__bar .custom_serach_popup input[type="search"]').val(' ');
+  $('.popup_search_box').html(' ').hide(); 
+   },1000);
+    });
+ });

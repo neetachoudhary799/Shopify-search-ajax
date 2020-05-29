@@ -1,0 +1,41 @@
+ {% layout none %} 
+{% if search.results %}
+<div class="page-width list-view-items custom_popup_box">
+  <div class="card-list__column grid__item  medium-up--one-half" >
+    {% for item in search.results | limit:5 %}
+    {% if item.object_type == 'product' and item.available == true %}
+    <div class="custom_product_image">
+      <img class="list-view-item__image" src="{{ item.featured_image.src | img_url: '100x' }}" alt="{{ item.image.alt | escape }}">
+      <div class="custom_content_info">
+        <a href="{{ item.url }}" class="list-view-item">
+          {{item.title}}
+        </a>
+        {%comment%}{{ item.content | strip_html | truncate: 200 }}{%endcomment%}
+        <div class="card__price--sale">{{ item.price | money_without_trailing_zeros }}</div>
+      </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+  </div>
+  <div class="card-list__column grid__item  medium-up--one-half" >
+    <h4>Pages & Post</h4>
+    {% for item in search.results | limit :100 %}
+    <div class="custom_pages">
+      {% if item.object_type == 'article' %}
+      <div><a href="{{ item.url }}" class="list-view-item">
+        {{item.title}}
+        </a></div>
+      {% elsif item.object_type == 'page' %}
+      <div> <a href="{{ item.url }}" class="list-view-item">
+        {{item.title}}
+        </a>
+      </div>
+      {% endif %}
+    </div>
+    {% endfor %}
+  </div>
+<div class="grid__item  medium-up--one-full" >
+  <div class="custom_view_result">View all results</div>
+  </div>
+</div>
+{% endif %}
