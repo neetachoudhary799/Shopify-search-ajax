@@ -1,0 +1,110 @@
+<li class=" searchbar">
+       			 <i class="fa fa-search" aria-hidden="true"></i>
+         <div class="togglesearch" style="display: none;">
+            {% include 'search-autocomplete' %}
+           <a href="#" class="close">X</a>
+      </div><div class="modal-bg" style="display: none;"></div></li>
+
+
+<script>
+$(document).ready(function() {
+	$(".fa-search").click(function() {
+	   $(".togglesearch").show();
+	  $('.modal-bg').show();
+	});
+  $('.togglesearch .close').click(function(){
+		$('.togglesearch').hide();
+		$('.modal-bg').hide();
+	});
+});
+
+</script>
+
+<style>
+  .site-header__logo img {
+    max-width: {{ section.settings.logo_max_width | escape | default: '180' | remove: 'px' | append: 'px' }};
+  }
+
+  @media screen and (max-width: 768px) {
+    .site-header__logo img {
+      max-width: 100%;
+    }
+    
+  }
+  /*custom css*/
+  .togglesearch {
+    text-align: center;
+}
+  .togglesearch a.close {
+    color: #000 !important;
+    z-index: 999;
+    position: relative;
+    top: -37px;
+    right: 0;
+}
+ .togglesearch form.search {
+    position: relative;
+    top: 2em;
+    width: 90%;
+    margin: 0 auto;
+}
+ .togglesearch {
+    background: #fff;
+    position: absolute;
+    top: 54px;
+   right: 0;
+    width: 100%;
+    height: 150px;
+    line-height: 30px;
+     box-shadow: 0 0 10px rgba(0,0,0,0.5); 
+    border-top: 4px solid #fecf52;
+    display: none;
+      z-index: 999;
+}
+.togglesearch:before{
+  display:none;
+  content: "";
+  position: absolute;
+  top: -32px;
+  right: 13px;
+  border-left: 12px solid transparent;
+  border-right: 12px solid transparent;
+  border-top: 14px solid transparent;
+  border-bottom: 14px solid #fecf52;
+}
+.togglesearch input[type="text"]{
+  width: 55%;
+  padding: 12px 35px;
+  outline: none;
+  font-size:20px;
+    border-bottom: 1px solid #000;
+  background:transparent !important;
+}
+.togglesearch input[type="button"]{
+  width: 80px;
+  padding: 5px 0;
+  background: #D80B15;
+  color: #fff;
+  margin-left: -6px;
+  border: 1px solid #D80B15;
+  outline: none;
+  cursor: pointer;
+  margin-top:14px;
+}
+  i.fa.fa-search {
+    font-size: 1.29412em;
+    color: #fff;
+    cursor: pointer;
+}
+  i.fa.fa-search:hover {
+    color: #fecf52;
+}
+  @media only screen and (min-width:240px) and (max-width: 768px){
+    .navbar ul li{
+        float:none;
+        display:block;
+        text-align:center;
+        margin:0 auto;
+    }
+} 
+</style>
